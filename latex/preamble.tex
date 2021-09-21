@@ -4,7 +4,7 @@
 
 \usepackage{extsizes}
 %\usepackage{cmap} % для кодировки шрифтов в pdf
-\usepackage{fontspec} 
+\usepackage{fontspec}
 \defaultfontfeatures{Ligatures={TeX}} 
 \setmainfont[Ligatures=TeX]{Times New Roman}
 \setmonofont[Mapping=tex-text]{Courier New}
@@ -21,7 +21,7 @@
 \usepackage{tikz}
 \usepackage{pgfplots}
 \pgfplotsset{compat=1.17}
-\usepackage[europeanresistors]{circuitikz}
+\usepackage[europeanresistors, RPvoltages]{circuitikz}
 \usetikzlibrary{arrows,decorations.markings}
 
 \usepackage[nodisplayskipstretch]{setspace}
@@ -62,12 +62,12 @@
  
 \titleformat{\section}
     {\normalsize\bfseries}
-    {\thesection}
+    {\thesection.}
     {1em}{}
  
 \titleformat{\subsection}
     {\normalsize\bfseries}
-    {\thesubsection}
+    {\thesubsection.}
     {1em}{}
 
 % Настройка вертикальных и горизонтальных отступов
@@ -92,15 +92,17 @@
 
 \usepackage{tocloft}
 \renewcommand{\cfttoctitlefont}{\hspace{0.38\textwidth} \bfseries\texorpdfstring{\MakeUppercase}{}}
-\renewcommand{\cftbeforetoctitleskip}{-1em}
+\renewcommand{\cftbeforetoctitleskip}{-0.5em}
 %\renewcommand{\cftaftertoctitle}{\mbox{}\hfill \\ \mbox{}\hfill{\footnotesize Стр.}\vspace{-2.5em}}
-\renewcommand{\cftchapfont}{\normalsize\bfseries \texorpdfstring{\MakeUppercase{\chaptername}}{{\chaptername}} }
-\renewcommand{\cftsecfont}{\hspace{31pt}}
+\renewcommand{\cftchapfont}{\normalsize \texorpdfstring{\MakeUppercase{\chaptername}}{{\chaptername}} }
+\renewcommand\cftchappagefont{\mdseries}
+\renewcommand{\cftsecfont}{\hspace{-11pt}}
 \renewcommand{\cftsubsecfont}{\hspace{11pt}}
 \renewcommand{\cftbeforechapskip}{1em}
 \renewcommand{\cftparskip}{-1mm}
 \renewcommand{\cftdotsep}{1}
 \renewcommand{\cftchapleader}{\cftdotfill{\cftdotsep}}
+\renewcommand{\cftsecaftersnum}{.}
 \setcounter{tocdepth}{2} % задать глубину оглавления — до subsection включительно
 
 \newcommand{\likechapterheading}[1]{ 
@@ -121,7 +123,6 @@
 \renewcommand{\bibsection}{\likechapter{Список використаної літератури}} % заголовок специального раздела
 \setlength{\bibsep}{0pt}
 
-\hyphenation{СУБД}
 \usepackage[hidelinks]{hyperref}
 \usepackage{microtype}
 
