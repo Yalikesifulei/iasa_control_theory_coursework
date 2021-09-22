@@ -1,0 +1,263 @@
+% !TEX root = ../main.tex
+\chapter{Розрахунок дискретних передаточних функцій}
+\section{Теоретичні дані}
+% Відповідно до рисунку \ref{pic1}, керовану координату $y(s)$
+% можна записати як 
+% \begin{gather}\label{eq:2_1}
+%     y(s) = W_{n}(s) \cdot u^* (s)
+% \end{gather}, де
+% $u^*(s)$ -- дискретне перетворення Лапласа керуючого діяння $u(t)$,
+% яке дорівнює
+% \begin{gather}
+%     u^*(s) = W_p^*(s) \cdot E^*(s)
+% \end{gather}
+% а $W_n(s) = W_E(s) \cdot W_O(S)$ -- передаточна функція приведеної неперервної частини.
+% При цьому
+% \begin{gather}
+%     E^*(s) = G^*(s) - y^*(s) 
+% \end{gather}
+% де $E^*(s)$, $G^*(s)$, $y^*(s)$ --- відповідно дискретне перетворення Лапласа від
+% помилки керування, задаючого діяння і керованої координати.
+
+% Застосуємо до \eqref{eq:2_1} дискретне перетворення Лапласа:
+% \begin{gather}
+%     y^*(s) = W_{n}^*(s) \cdot u^*(s)
+% \end{gather}
+% Після
+
+Дискретну передаточну функцію приведеної неперервної частини (ПНЧ)
+об'єкта має вигляд
+\begin{gather}
+    \nonumber
+    W_{\text{п}}(z) = z \left\{W_E(s) \cdot W_O(s) \right\} = 
+    z\left\{ \frac{1-e^{-s T_0}}{s} \cdot W_O(S)\right\} = \\ =
+    z\left\{\left(1 - e^{-s T_0}\right)\cdot \frac{W_O(s)}{s}\right\} = 
+    \left(1 - z^{-1}\right) \cdot z\left\{\frac{W_O(s)}{s} \right\}
+\end{gather}
+Дискретна передаточна функція замкненого контуру цифрового керування має вигляд
+\begin{gather}
+    W_{\text{з}}(z) = \frac{
+        W_{\text{п}}(z) \cdot W_p(z)
+    }{1 + W_{\text{п}}(z) \cdot W_p(z)}
+\end{gather}
+де $W_p(z)$ -- дискретна передаточна функція регулятора, що для ПІД-регулятора
+має вигляд \eqref{PID}, а для ПІ-регулятора -- вигляд \eqref{PI}.
+Далі за текстом термін <<дискретна передаточна функція>> буде скорочено до ДПФ.
+
+\section{Випадок \texorpdfstring{$W_O(S) = \frac{k}{T_1 s + 1}$}{1}}
+Обчислимо $z$-перетворення для $\frac{W_O(S)}{s} = \frac{k}{s(T_1 s + 1)} = \frac{k}{s} - \frac{k T_1}{T_1 s + 1}$.
+За таблицею $z$-перетворення отримаємо
+\begin{gather}
+    z\left\{\frac{W_O(s)}{s} \right\} = 
+    \frac{kz}{z-1} - \frac{kz}{z - e^{T_0 / T_1}} = 
+    \frac{k \left(1 - e^{- T_0 / T_1}\right)z}{
+        (z-1) \left(z - e^{- T_0 / T_1}\right)
+    }
+\end{gather}
+Тому ДПФ ПНЧ має вигляд
+\begin{gather}
+    W_{\text{п}}(z) = \left(1 - z^{-1}\right) \cdot z\left\{\frac{W_O(s)}{s} \right\} = 
+    \frac{z-1}{z} \cdot \frac{k \left(1 - e^{- T_0 / T_1}\right)z}{
+        (z-1) \left(z - e^{- T_0 / T_1}\right)
+    } = \nonumber \\ =
+    \frac{k \left(1 - e^{- T_0 / T_1}\right)}{
+        z - e^{- T_0 / T_1}
+    }
+\end{gather}
+Отже, ДПФ замкненого контуру цифрового керування з ПІД-регулятором має вигляд
+\begin{gather}
+    W_{\text{з}}(z) = \frac{
+        W_{\text{п}} (z) \cdot W_p(z)
+    }{1 + W_{\text{п}} (z) \cdot W_p(z)} = 
+    \frac{
+        \frac{k \left(1 - e^{- T_0 / T_1}\right)}{
+            z - e^{- T_0 / T_1}
+        } \cdot K_p \left(
+            1 + \frac{T_0}{T_I \left(1 - z^{-1}\right)} + \frac{T_D\left(1 - z^{-1}\right)}{T_0}
+        \right)
+    }{
+        1 + 
+        \frac{k \left(1 - e^{- T_0 / T_1}\right)}{
+            z - e^{- T_0 / T_1}
+        } \cdot K_p \left(
+            1 + \frac{T_0}{T_I \left(1 - z^{-1}\right)} + \frac{T_D\left(1 - z^{-1}\right)}{T_0}
+        \right)
+    } = \nonumber \\ =
+    \frac{
+        k \left(1 - e^{- T_0 / T_1}\right) \cdot K_p \left(
+            1 + \frac{T_0}{T_I \left(1 - z^{-1}\right)} + \frac{T_D\left(1 - z^{-1}\right)}{T_0}
+        \right)
+    }{
+        \left(z - e^{- T_0 / T_1}\right) + k \left(1 - e^{- T_0 / T_1}\right) \cdot K_p \left(
+            1 + \frac{T_0}{T_I \left(1 - z^{-1}\right)} + \frac{T_D\left(1 - z^{-1}\right)}{T_0}
+        \right)
+    } = \nonumber \\ =
+    \mbox{\normalsize $\frac{
+        k K_p \left(z - e^{- T_0 / T_1}\right)
+        \left(
+            T_0 T_I \left(1 - z^{-1}\right) + T_0^2 + T_I T_D \left(1 - z^{-1}\right)^2
+        \right)
+    }{
+        \left(z - e^{- T_0 / T_1}\right) T_0 T_I \left(1 - z^{-1}\right) + k K_p \left(z - e^{- T_0 / T_1}\right)
+        \left(
+            T_0 T_I \left(1 - z^{-1}\right) + T_0^2 + T_I T_D \left(1 - z^{-1}\right)^2
+        \right)
+    }$} 
+    % = \nonumber \\ =
+    % \mbox{\normalsize $\frac{
+    %     k K_p \left(z - e^{- T_0 / T_1}\right)
+    %     \left(
+    %         T_0 T_I  z \left(z - 1\right) + z^2 T_0^2 + T_I T_D \left(z - 1\right)^2
+    %     \right)
+    % }{
+    %     \left(z - e^{- T_0 / T_1}\right) T_0 T_I z \left(z - 1\right) + k K_p \left(z - e^{- T_0 / T_1}\right)
+    %     \left(
+    %         T_0 T_I z \left(z - 1\right) + z^2 T_0^2 + T_I T_D \left(z - 1\right)^2
+    %     \right)
+    % }$}
+\end{gather}
+Відповідно, з ПІ-регулятором ($T_D = 0$):
+\begin{gather}
+    W_{\text{з}}(z) = \mbox{\normalsize $\frac{
+        k K_p \left(z - e^{- T_0 / T_1}\right)
+        \left(
+            T_0 T_1 \left(1 - z^{-1}\right) + T_0^2
+        \right)
+    }{
+        \left(z - e^{- T_0 / T_1}\right) T_0 T_1 \left(1 - z^{-1}\right) + k K_p \left(z - e^{- T_0 / T_1}\right)
+        \left(
+            T_0 T_1 \left(1 - z^{-1}\right) + T_0^2
+        \right)
+    }$} = \nonumber \\ =
+    \frac{
+        k K_p \left(z - e^{- T_0 / T_1}\right)
+        \left(
+            T_1 \left(1 - z^{-1}\right) + T_0
+        \right)
+    }{
+        \left(z - e^{- T_0 / T_1}\right) T_1 \left(1 - z^{-1}\right) + k K_p \left(z - e^{- T_0 / T_1}\right)
+        \left(
+            T_1 \left(1 - z^{-1}\right) + T_0
+        \right)
+    }
+\end{gather}
+
+\section{Випадок \texorpdfstring{$W_O(S) = \frac{k}{(T_1 s + 1)(T_2 s + 1)}$}{2}}
+Обчислимо $z$-перетворення для $\frac{W_O(S)}{s} = \frac{k}{s(T_1 s + 1)(T_2 s + 1)} = 
+\frac{k}{s} - \frac{k T_1^2}{(T_1 - T_2) (T_1 s + 1)} + \frac{k T_2^2}{(T_1 - T_2) (T_2 s + 1)}$.
+За таблицею $z$-перетворення отримаємо
+\begin{gather}
+    z\left\{\frac{W_O(s)}{s} \right\} = 
+    k \left(
+        \frac{z}{z-1} - \frac{az}{T_1 (z - d_1)} +
+        \frac{bz}{T_2 (z - d_2)}
+    \right)
+\end{gather}
+де $a = \frac{T_1^2}{T_1 - T_2}$, $b = \frac{T_2^2}{T_1 - T_2}$,
+$d_1 = e^{-T_0 / T_1}$, $d_2 = e^{-T_0 / T_2}$.
+Тому ДПФ ПНЧ має вигляд
+\begin{gather}
+    W_{\text{п}}(z) = \left(1 - z^{-1}\right) \cdot z\left\{\frac{W_O(s)}{s} \right\} = 
+    \nonumber \\ =
+    \frac{z-1}{z} \cdot k \left(
+        \frac{z}{z-1} - \frac{az}{T_1 (z - d_1)} +
+        \frac{bz}{T_2 (z - d_2)}
+    \right) = \nonumber \\ =
+    k \left(
+        1 - \frac{a(z-1)}{T_1 (z - d_1)} +
+        \frac{b(z-1)}{T_2 (z - d_2)}
+    \right)
+\end{gather}
+Отже, ДПФ замкненого контуру цифрового керування з ПІД-регулятором має вигляд
+\begin{gather}
+    W_{\text{з}}(z) = \frac{
+        W_{\text{п}} (z) \cdot W_p(z)
+    }{1 + W_{\text{п}} (z) \cdot W_p(z)} = \nonumber \\ =
+    \frac{
+        k \left(
+            1 - \frac{a(z-1)}{T_1 (z - d_1)} +
+            \frac{b(z-1)}{T_2 (z - d_2)}
+        \right) K_p \left(
+            1 + \frac{T_0}{T_I \left(1 - z^{-1}\right)} + \frac{T_D\left(1 - z^{-1}\right)}{T_0}
+        \right)
+    }{
+        1 +  k \left(
+            1 - \frac{a(z-1)}{T_1 (z - d_1)} +
+            \frac{b(z-1)}{T_2 (z - d_2)}
+        \right) K_p \left(
+            1 + \frac{T_0}{T_I \left(1 - z^{-1}\right)} + \frac{T_D\left(1 - z^{-1}\right)}{T_0}
+        \right)
+    } = \nonumber \\ =
+    \mbox{\normalsize $\frac{
+            k K_p \left(
+                1 - \frac{a(z-1)}{T_1 (z - d_1)} +
+                \frac{b(z-1)}{T_2 (z - d_2)}
+            \right) \left(
+                T_0 T_I \left(1 - z^{-1}\right) + T_0^2 + T_I T_D \left(1 - z^{-1}\right)^2
+            \right)
+        }{
+            T_0 T_I \left(1 - z^{-1}\right) + k K_p \left(
+                1 - \frac{a(z-1)}{T_1 (z - d_1)} +
+                \frac{b(z-1)}{T_2 (z - d_2)}
+            \right) \left(
+                T_0 T_I \left(1 - z^{-1}\right) + T_0^2 + T_I T_D \left(1 - z^{-1}\right)^2
+            \right)
+        }$
+    } = \nonumber \\ 
+    \mbox{\small $ = \frac{
+            k K_p \left(
+                T_1 T_2 (z - d_1) (z - d_2) - a T_2(z-1) (z - d_2) +
+                b T_1 (z-1) (z - d_1)
+            \right) \left(
+                T_0 T_I \left(1 - z^{-1}\right) + T_0^2 + T_I T_D \left(1 - z^{-1}\right)^2
+            \right)
+        }{
+            T_0 T_I T_1 T_2 \left(1 - z^{-1}\right) (z - d_1) (z - d_2) + k K_p \left(
+                T_1 T_2 (z - d_1) (z - d_2) - a T_2(z-1) (z - d_2) +
+                b T_1 (z-1) (z - d_1)
+            \right) \left(
+                T_0 T_I \left(1 - z^{-1}\right) + T_0^2 + T_I T_D \left(1 - z^{-1}\right)^2
+            \right)
+        }$
+    }
+\end{gather}
+Відповідно, з ПІ-регулятором ($T_D = 0$):
+\begin{gather}
+    W_{\text{з}}(z) = \nonumber \\ 
+    \mbox{\small $ = \frac{
+            k K_p \left(
+                T_1 T_2 (z - d_1) (z - d_2) - a T_2(z-1) (z - d_2) +
+                b T_1 (z-1) (z - d_1)
+            \right) \left(
+                T_0 T_I \left(1 - z^{-1}\right) + T_0^2
+            \right)
+        }{
+            T_0 T_I T_1 T_2 \left(1 - z^{-1}\right) (z - d_1) (z - d_2) + k K_p \left(
+                T_1 T_2 (z - d_1) (z - d_2) - a T_2(z-1) (z - d_2) +
+                b T_1 (z-1) (z - d_1)
+            \right) \left(
+                T_0 T_I \left(1 - z^{-1}\right) + T_0^2
+            \right)
+        }$
+    } = \nonumber \\ 
+    \mbox{\small $ = \frac{
+            k K_p \left(
+                T_1 T_2 (z - d_1) (z - d_2) - a T_2(z-1) (z - d_2) +
+                b T_1 (z-1) (z - d_1)
+            \right) \left(
+                T_I \left(1 - z^{-1}\right) + T_0
+            \right)
+        }{
+            T_I T_1 T_2 \left(1 - z^{-1}\right) (z - d_1) (z - d_2) + k K_p \left(
+                T_1 T_2 (z - d_1) (z - d_2) - a T_2(z-1) (z - d_2) +
+                b T_1 (z-1) (z - d_1)
+            \right) \left(
+                T_I \left(1 - z^{-1}\right) + T_0
+            \right)
+        }$
+    }
+\end{gather}
+
+\section{Випадок \texorpdfstring{$W_O(S) = \frac{k e^{-\tau s}}{T_1 s + 1}$}{3}}
+
+\section{Випадок \texorpdfstring{$W_O(S) = \frac{k e^{-\tau s}}{(T_1 s + 1)(T_2 s + 1)}$}{4}}
