@@ -290,8 +290,8 @@ $d_1 = e^{-T_0 / T_1}$, $d_2 = e^{-T_0 / T_2}$.
     }
 \end{gather}
 де $d$ -- ціла частина від ділення часу запізнення $\tau$ на період квантування
-$T_0$, $a = 1 - \frac{\tau - d T_0}{T_0}$, $C_1 = 1 - e^{\frac{a T_0}{T_1}}$,
-$C_2 = e^{\frac{a T_0}{T_1}} - e^{\frac{T_0}{T_1}}$.
+$T_0$, $a = 1 - \frac{\tau - d T_0}{T_0}$, $C_1 = 1 - e^{-\frac{a T_0}{T_1}}$,
+$C_2 = e^{-\frac{a T_0}{T_1}} - e^{-\frac{T_0}{T_1}}$.
 Отже, ДПФ замкненого контуру цифрового керування з ПІД-регулятором має вигляд
 \begin{gather*}
     W_{\text{з}}(z) = \frac{
@@ -338,7 +338,7 @@ $C_2 = e^{\frac{a T_0}{T_1}} - e^{\frac{T_0}{T_1}}$.
     }
 \end{gather}
 Відповідно, з ПІ-регулятором ($T_D = 0$):
-\begin{gather}
+\begin{gather}\label{W_3_for_direct}
     W_{\text{з}}(z) = \nonumber \\ = 
     \mbox{
         \normalsize $
@@ -351,7 +351,7 @@ $C_2 = e^{\frac{a T_0}{T_1}} - e^{\frac{T_0}{T_1}}$.
         $
     } = \nonumber \\ = 
     \frac{
-            k K_p \left(C_1 + C_2 z^{-1}\right) z^{-d-1} \left(T_I \left(1 - z^{-1}\right) + T_0\right)
+            k K_p z^{-d-1} \left(C_1 + C_2 z^{-1}\right) \left(T_I \left(1 - z^{-1}\right) + T_0\right)
         }{
             T_I \left(1 - e^{- T_0 / T_1} z^{-1}\right) \left(1 - z^{-1}\right) + 
             k K_p z^{-d-1} \left(C_1 + C_2 z^{-1}\right) \left(T_I \left(1 - z^{-1}\right) + T_0\right)
