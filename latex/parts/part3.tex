@@ -136,19 +136,49 @@ $W_p(s) = K_p \left(1 + \frac{1}{T_I s}\right) = K_p \cdot \frac{T_1 s + 1}{T_1 
         \hline
         $\varepsilon$ & $0.01$ & $0.02$ & $0.03$ & $0.04$ & $0.05$ \\
         \hline
+        $\omega_k$ & $2.0361$ & $1.0391$ & $0.6785$ & $0.5285$ & $0.3937$ \\
+        \hline
         $T_0$ & $1.5430$ & $3.0234$ & $4.6304$ & $5.9449$ & $7.9803$ \\
         \hline
     \end{tabular}
 \end{center}
 Залежність $T_0$ від $\varepsilon$:
 \begin{center}
-    \includegraphics[scale=0.9]{pics/W_01_Jury.png}
+    \includegraphics[scale=0.85]{pics/W_01_Jury.png}
 \end{center}
 
 \subsection{Випадок \texorpdfstring{$W_{O_2}(s) = \frac{k e^{-\tau s}}{(T_1 s + 1)(T_2 s + 1)}$}{2}}
 Згідно з розділом \ref{ch:resonance}, оптимальним регулятором в цьому випадку є ПІ-регулятор з передаточною функцією 
-$W_p(s) = K_p \left(1 + \frac{1}{T_I s}\right) = K_p \cdot \frac{T_1 s + 1}{T_1 s}$, де $K_p = ?$, $T_I = ?$.
-Знайдемо $\left| W_{\text{з}}(j\omega) \right|$: ???
+$W_p(s) = K_p \left(1 + \frac{1}{T_I s}\right) = K_p \cdot \frac{T_1 s + 1}{T_1 s}$, де $K_p = 0.23703$, $T_I = 105.72649$.
+Аналітичний запис $\left| W_{\text{з}}(j\omega) \right|$ досить складний, тому одразу наведемо чисельно знайдені розв'язки
+рівняння $\left| W_{\text{з}}(j\omega) \right| = \varepsilon$ для різних $\varepsilon$:
+\begin{center}
+    \begin{tabular}{|c|c|c|c|c|c|}
+        \hline
+        $\varepsilon$ & $0.01$ & $0.02$ & $0.03$ & $0.04$ & $0.05$ \\
+        \hline
+        $\omega_k$ & $0.5746$ & $0.4084$ & $0.3284$ & $0.2800$ & $0.2478$ \\
+        \hline
+        $T_0$ & $5.4670$ & $7.6924$ & $9.5656$ & $11.2188$ & $12.6804$ \\
+        \hline
+    \end{tabular}
+\end{center}
+Залежність $T_0$ від $\varepsilon$:
+\begin{center}
+    \includegraphics[scale=0.85]{pics/W_02_Jury.png}
+\end{center}
+% \begin{gather*}
+%     \left| W_{\text{з}}(j\omega) \right| = \frac{
+%         \left| W_{O_2} (j \omega) W_p (j \omega) \right|
+%     }{
+%         \left| 1 + W_{O_2} (j \omega) W_p (j \omega) \right|
+%     } = 
+%     \frac{
+%         \left|\frac{k e^{-\tau j \omega}}{(T_1 j \omega + 1)(T_2 j \omega + 1)} \cdot  K_p \cdot \frac{T_1 j \omega + 1}{T_1 j \omega} \right|
+%     }{
+%         \left|1 + \frac{k e^{-\tau j \omega}}{(T_1 j \omega + 1)(T_2 j \omega + 1)} \cdot  K_p \cdot \frac{T_1 j \omega + 1}{T_1 j \omega} \right|
+%     } =
+% \end{gather*}
 
 \section{Розрахунок для об'єкта з динамікою в чисельнику}
 Розглядається об'єкт з передаточною функцією $W_O(s) = \frac{
