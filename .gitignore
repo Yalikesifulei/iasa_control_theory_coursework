@@ -254,5 +254,7 @@ TSWLatexianTemp*
 # standalone packages
 *.sta
 
-# Wolfram notebooks
+# notebooks
 *.nb
+inv_laplace.ipynb
+sympy_test.ipynb
