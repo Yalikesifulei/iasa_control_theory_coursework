@@ -281,12 +281,12 @@ $d_1 = e^{-T_0 / T_1}$, $d_2 = e^{-T_0 / T_2}$.
      \right]}
 \end{gather}
 Тоді після перетворень ДПФ ПНЧ матиме вигляд
-\begin{gather}
+\begin{gather}\label{transfer_function_for_stability}
     W_{\text{п}}(z) = \left(1 - z^{-1}\right) \cdot z\left\{\frac{W_O(s)}{s} \right\} = 
     \frac{
         k \left(C_1 + C_2 z^{-1}\right) z^{-d-1}
     }{
-        \left(1 - e^{-T_0 / T_1} z^{-1}\right)
+        1 - e^{-T_0 / T_1} z^{-1}
     }
 \end{gather}
 де $d$ -- ціла частина від ділення часу запізнення $\tau$ на період квантування
