@@ -44,7 +44,7 @@
 має вигляд \eqref{PID}, а для ПІ-регулятора -- вигляд \eqref{PI}.
 Далі за текстом термін <<дискретна передаточна функція>> буде скорочено до ДПФ.
 
-\section{Випадок \texorpdfstring{$W_O(S) = \frac{k}{T_1 s + 1}$}{1}}
+\section{Випадок \texorpdfstring{$W_O(s) = \frac{k}{T_1 s + 1}$}{1}}
 Обчислимо $z$-перетворення для $\frac{W_O(S)}{s} = \frac{k}{s(T_1 s + 1)} = \frac{k}{s} - \frac{k T_1}{T_1 s + 1}$.
 За таблицею $z$-перетворення отримаємо
 \begin{gather}
@@ -153,7 +153,7 @@
     }
 \end{gather}
 
-\section{Випадок \texorpdfstring{$W_O(S) = \frac{k}{(T_1 s + 1)(T_2 s + 1)}$}{2}}
+\section{Випадок \texorpdfstring{$W_O(s) = \frac{k}{(T_1 s + 1)(T_2 s + 1)}$}{2}}
 Обчислимо $z$-перетворення для $\frac{W_O(S)}{s} = \frac{k}{s(T_1 s + 1)(T_2 s + 1)} = 
 \frac{k}{s} - \frac{k T_1^2}{(T_1 - T_2) (T_1 s + 1)} + \frac{k T_2^2}{(T_1 - T_2) (T_2 s + 1)}$.
 За таблицею $z$-перетворення отримаємо
@@ -269,7 +269,7 @@ $d_1 = e^{-T_0 / T_1}$, $d_2 = e^{-T_0 / T_2}$.
     }
 \end{gather}
 
-\section{Випадок \texorpdfstring{$W_O(S) = \frac{k e^{-\tau s}}{T_1 s + 1}$}{3}}
+\section{Випадок \texorpdfstring{$W_O(s) = \frac{k e^{-\tau s}}{T_1 s + 1}$}{3}}
 Обчислимо $z$-перетворення для $\frac{W_O(S)}{s} = \frac{k e^{-\tau s}}{s(T_1 s + 1)} = 
 \frac{k e^{-\tau s}}{s} - \frac{k T_1 e^{-\tau s}}{T_1 s + 1}$.
 За таблицею $z$-перетворення отримаємо для $d T_0 < \tau \leq (d+1)T_0$
@@ -357,7 +357,7 @@ $C_2 = e^{-\frac{a T_0}{T_1}} - e^{-\frac{T_0}{T_1}}$.
             k K_p z^{-d-1} \left(C_1 + C_2 z^{-1}\right) \left(T_I \left(1 - z^{-1}\right) + T_0\right)
     }
 \end{gather}
-\section{Випадок \texorpdfstring{$W_O(S) = \frac{k e^{-\tau s}}{(T_1 s + 1)(T_2 s + 1)}$}{4}}
+\section{Випадок \texorpdfstring{$W_O(s) = \frac{k e^{-\tau s}}{(T_1 s + 1)(T_2 s + 1)}$}{4}}
 Обчислимо $z$-перетворення для $\frac{W_O(S)}{s} = \frac{k e^{-\tau s}}{s(T_1 s + 1)(T_2 s + 1)} = 
 \frac{k e^{-\tau s}}{s} - \frac{k T_1^2 e^{-\tau s}}{(T_1 - T_2) (T_1 s + 1)} + \frac{k T_2^2 e^{-\tau s}}{(T_1 - T_2) (T_2 s + 1)}$.
 За таблицею $z$-перетворення отримаємо для $d T_0 < \tau \leq (d+1)T_0$

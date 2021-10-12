@@ -95,14 +95,15 @@
 %\renewcommand{\labelenumii}{\arabic{enumii})}
 
 \usepackage{tocloft}
+\setlength\cftaftertoctitleskip{10pt} % отступ от ЗМІСТ до первого раздела
 \renewcommand{\cfttoctitlefont}{\hspace{0.38\textwidth} \bfseries\texorpdfstring{\MakeUppercase}{}}
-\renewcommand{\cftbeforetoctitleskip}{-0.5em}
+\renewcommand{\cftbeforetoctitleskip}{0.em}
 %\renewcommand{\cftaftertoctitle}{\mbox{}\hfill \\ \mbox{}\hfill{\footnotesize Стр.}\vspace{-2.5em}}
 \renewcommand{\cftchapfont}{\normalsize \texorpdfstring{\MakeUppercase{\chaptername}}{{\chaptername}} }
 \renewcommand\cftchappagefont{\mdseries}
 \renewcommand{\cftsecfont}{\hspace{-11pt}}
 \renewcommand{\cftsubsecfont}{\hspace{11pt}}
-\renewcommand{\cftbeforechapskip}{1em}
+\renewcommand{\cftbeforechapskip}{0em}
 \renewcommand{\cftparskip}{-1mm}
 \renewcommand{\cftdotsep}{1}
 \renewcommand{\cftchapleader}{\cftdotfill{\cftdotsep}}
@@ -115,7 +116,7 @@
     \end{center}}
 
 \makeatletter
-    \newcommand{\l@likechapter}[2]{{\bfseries\@dottedtocline{0}{0pt}{0pt}{#1}{#2}}}
+    \newcommand{\l@likechapter}[2]{{\@dottedtocline{0}{0pt}{0pt}{#1}{#2}}}
 \makeatother
 \newcommand{\likechapter}[1]{    
     \likechapterheading{#1}
