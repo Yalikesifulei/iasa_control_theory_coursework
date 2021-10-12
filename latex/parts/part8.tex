@@ -1,0 +1,57 @@
+% !TEX root = ../main.tex
+\chapter{Алгоритми цифрового керування}
+\section{Позиційний алгоритм}
+У даному алгоритмі регулятор цифрового керування виконує розрахунок повної величини
+керуючого діяння у формі \eqref{PID}. Віднявши з обох частин $u\left([n-1] T_0\right)$,
+отримаємо рівняння
+\begin{gather*}
+    u\left[n T_0\right] - u\left[(n-1) T_0\right] = K_p \left(
+        e\left[n T_0\right] - e\left[(n-1) T_0\right]
+    \right) + 
+    \frac{K_p T_0}{T_I} e\left[n T_0\right] + \\ +
+    \frac{K_p T_D}{T_0} \left(
+        e\left[n T_0\right] - 2e\left[(n-1) T_0\right] + e\left[(n-2) T_0\right]
+    \right)
+\end{gather*}
+яке можна записати як
+\begin{gather}\label{PID:pos_alg}
+    u\left[n T_0\right] = u\left[(n-1) T_0\right] + 
+    A_0 \cdot e\left[n T_0\right] + A_1 \cdot e\left[(n-1) T_0\right] + A_2 \cdot e\left[(n-2) T_0\right]
+\end{gather}
+де $A_0 = K_p \left(1 + \frac{T_0}{T_I} + \frac{T_D}{T_0}\right)$,
+$A_1 = -K_p \left(1 + 2\frac{T_D}{T_0}\right)$, $A_3 = \frac{K_p T_D}{T_0}$, а похибка визначається як
+$e\left[n T_0\right] = G\left[n T_0\right] - y\left[n T_0\right]$.
+Отримане рівняння \eqref{PID:pos_alg} є зручною для програмування на комп'ютері формою рівняння
+\eqref{PID}.
+Обчислимо значення коефіцієнтів $A_0, A_1, A_2$ для систем з розрахованими настройками ПІ-регулятора.
+Оскільки $T_D = 0$, то вирази спрощуються до $A_ 0 = K_p\left(1 + \frac{T_0}{T_I}\right)$,
+$A_1 = -K_p$, $A_2 = 0$.
+\begin{center}
+    \begin{tabular}{|c|c|c|}
+        \hline
+        об'єкт, метод & $A_0$ & $A_1$ \\
+        \hline
+        $W_O(s) = \frac{ k e^{-\tau s}}{(T_1 s + 1) (T_2 s + 1) (T_3 s + 1)}$, резонансний метод 
+        & 0.16682 & -0.15558 \\ \hline
+        $W_O(s) = \frac{ k e^{-\tau s}}{(T_1 s + 1) (T_2 s + 1)}$, резонансний метод 
+        & 0.21592 & -0.20311 \\ \hline
+        $W_O(s) = \frac{ k e^{-\tau s}}{T_1 s + 1}$, метод прямого синтезу, $\lambda = \frac{1}{T_1}$ 
+        & 0.07675 & -0.07650 \\ \hline
+        $W_O(s) = \frac{ k e^{-\tau s}}{T_1 s + 1}$, метод прямого синтезу, $\lambda = \frac{1}{1.5T_1}$ 
+        & 0.05658 & -0.05640 \\ \hline
+        $W_O(s) = \frac{ k e^{-\tau s}}{T_1 s + 1}$, метод прямого синтезу, $\lambda = \frac{1}{2T_1}$ 
+        & 0.04474 & -0.04460 \\ \hline
+        $W_O(s) = \frac{ k e^{-\tau s}}{T_1 s + 1}$, метод прямого синтезу, $\lambda = \frac{1}{3T_1}$ 
+        & 0.03160 & -0.03150 \\ \hline
+    \end{tabular}
+\end{center}
+
+\section{Швидкісний алгоритм}
+Швидкісний алгоритм відрізняється тим, що вихідний сигнал цифрового регулятора формується як швидкість зміни керуючого діяння.
+На кожному періоді квантування визначається приріст керуючого діяння
+$\Delta u\left[n T_0\right] = u\left[n T_0\right] - u\left[(n-1) T_0\right]$,
+тому з \eqref{PID:pos_alg}
+\begin{gather}
+    \Delta u\left[n T_0\right] = 
+    A_0 \cdot e\left[n T_0\right] + A_1 \cdot e\left[(n-1) T_0\right] + A_2 \cdot e\left[(n-2) T_0\right]
+\end{gather}

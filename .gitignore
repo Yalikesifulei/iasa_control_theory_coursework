@@ -258,3 +258,5 @@ TSWLatexianTemp*
 *.nb
 inv_laplace.ipynb
 sympy_test.ipynb
+.ipynb_checkpoints/sympy_test-checkpoint.ipynb
+final_task.ipynb
